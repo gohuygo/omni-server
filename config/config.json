@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "huynguyen",
+    "password": null,
+    "database": "omni_server_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "huynguyen",
+    "password": null,
+    "database": "omni_server_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "huynguyen",
+    "password": null,
+    "database": "omni_server_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
