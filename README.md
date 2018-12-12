@@ -19,3 +19,13 @@
 4. Start the node server:
 
   `node app.js`
+
+### Deployment
+
+1. Add the Heroku remote:
+
+  `git remote add heroku https://git.heroku.com/floating-hamlet-63452.git`
+
+2. Push your changes to Heroku:
+
+  `git push heroku master`
