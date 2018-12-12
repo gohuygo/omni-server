@@ -6,6 +6,14 @@
 
 `npm install`
 
-2. Start the node server:
+2. Update config.json with your db settings and create your db:
 
-`node server.js`
+  * `sequelize db:create`
+
+3. Run migrations:
+
+  * `sequelize db:migrate`
+
+4. Start the node server:
+
+  * `node server.js`
