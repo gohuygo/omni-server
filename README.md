@@ -1,5 +1,7 @@
 ## Server
 
+  Server is hosted on Heroku - https://floating-hamlet-63452.herokuapp.com
+
 ### Installation
 
 1. Install the dependencies:
