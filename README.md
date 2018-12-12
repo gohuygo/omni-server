@@ -29,3 +29,8 @@
 2. Push your changes to Heroku:
 
   `git push heroku master`
+
+3. Run your migrations:
+
+  `heroku run bash`
+  `sequelize db:migrate`
