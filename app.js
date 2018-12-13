@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const models  = require('./db/models/index');
 const bcrypt  = require('bcrypt');
@@ -8,12 +10,7 @@ const jwt = require('jsonwebtoken');
 const User = models.user;
 const router = express.Router();
 
-// TODO: Change and move to env variable
-const secret = "hello1234"
-
 require('./passport.js');
-
-const port = process.env.PORT || 8080
 
 const app = express()
 
@@ -43,7 +40,7 @@ app.post('/login', (req, res) => {
       }
 
       // Generate a signed JWT
-      const token = jwt.sign(JSON.stringify(payload), secret);
+      const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET);
 
       // Assign JWT to cookie
       res.cookie('jwt', token, { httpOnly: true, secure: true });
@@ -69,7 +66,7 @@ app.post('/register', async (req, res) => {
 });
 
 
-app.listen(port, () => {
- console.log(`Server listening on port: ${port}`)
+app.listen(process.env.PORT, () => {
+ console.log(`Server listening on port: ${process.env.PORT}`)
 })
 

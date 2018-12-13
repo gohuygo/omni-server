@@ -10,11 +10,11 @@
 
 2. Update config/database.json with your db settings and create your db:
 
-  `sequelize db:create`
+  `node_modules/.bin/sequelize db:create`
 
 3. Run migrations:
 
-  `sequelize db:migrate`
+  `node_modules/.bin/sequelize db:migrate`
 
 4. Start the node server:
 

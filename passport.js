@@ -3,9 +3,6 @@ const LocalStrategy = require('passport-local').Strategy
 const JWTStrategy = require('passport-jwt').Strategy
 const bcrypt = require('bcrypt')
 
-// TODO: Change and move to env variable
-const secret = "hello1234"
-
 const User = require('./db/models/index').user;
 
 passport.use(new LocalStrategy({
@@ -28,7 +25,7 @@ passport.use(new LocalStrategy({
 }))
 
 passport.use(new JWTStrategy(
-  { jwtFromRequest: req => req.cookies.jwt, secretOrKey: secret},
+  { jwtFromRequest: req => req.cookies.jwt, secretOrKey: process.env.JWT_SECRET},
   (jwtPayload, done) => {
     if (jwtPayload.expires > Date.now()) {
       return done('jwt expired')
