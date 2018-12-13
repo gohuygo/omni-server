@@ -11,7 +11,7 @@ const router = express.Router();
 // TODO: Change and move to env variable
 const secret = "hello1234"
 
-const passportConfig = require('./passport.js');
+require('./passport.js');
 
 const port = process.env.PORT || 8080
 
@@ -46,7 +46,7 @@ app.post('/login', (req, res) => {
       const token = jwt.sign(JSON.stringify(payload), secret);
 
       // Assign JWT to cookie
-      res.cookie('jwt', jwt, { httpOnly: true, secure: true });
+      res.cookie('jwt', token, { httpOnly: true, secure: true });
       res.status(200).send({ email: user.email });
     });
   })(req, res);
@@ -55,12 +55,8 @@ app.post('/login', (req, res) => {
 app.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
-  // authentication will take approximately 13 seconds
-  // https://pthree.org/wp-content/uploads/2016/06/bcrypt.png
-  const hashCost = 10;
-
   try {
-    const passwordHash = await bcrypt.hash(password, hashCost);
+    const passwordHash = await bcrypt.hash(password, 10);
     const userDocument = User.create({ email: email, password: passwordHash });
 
     res.status(200).send({ email });

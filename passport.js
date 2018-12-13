@@ -27,16 +27,12 @@ passport.use(new LocalStrategy({
   }
 }))
 
-passport.use(new JWTStrategy({
-    jwtFromRequest: req => req.cookies.jwt,
-    secretOrKey: secret,
-  },
+passport.use(new JWTStrategy(
+  { jwtFromRequest: req => req.cookies.jwt, secretOrKey: secret},
   (jwtPayload, done) => {
-
     if (jwtPayload.expires > Date.now()) {
       return done('jwt expired')
     }
-
     return done(null, jwtPayload)
   }
 ))
