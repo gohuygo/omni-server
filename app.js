@@ -17,9 +17,11 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.post('/login', (req, res) => {
   passport.authenticate('local', { session: false }, (error, user) => {
