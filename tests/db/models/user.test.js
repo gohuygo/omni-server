@@ -11,11 +11,15 @@ describe('user#validations', function () {
 
   test('it creates a user', async () => {
     const user = await User.create({ email: 'user@email.com', password: 'password', name: 'name1' });
+    const user2 = await User.create({ email: 'diff@email.com', password: 'password', name: 'name1' });
+
     expect(user).not.toBe(null)
+    expect(user2).not.toBe(null)
   });
 
   test('it errors when the email is already used', async () => {
     await User.create({ email: 'user@email.com', password: 'password', name: 'name1' });
+
     try {
       await User.create({ email: 'user@email.com', password: 'password', name: 'name2' });
     } catch (err) {
