@@ -65,14 +65,13 @@ app.post('/register', async (req, res) => {
 
   try {
     const passwordHash = await bcrypt.hash(password, 10);
-    const userDocument = User.create({ email: email, password: passwordHash, name: name });
+    const userDocument = await User.create({ email: email, password: passwordHash, name: name });
 
     res.status(200).send({ email });
 
   } catch (error) {
-    res.status(400).send({
-      error: 'req body should take the form { email, password }',
-    });
+    const errorMsg = error.errors[0].message || error
+    res.status(400).send({ error: errorMsg });
   }
 });
 
