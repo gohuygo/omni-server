@@ -4,7 +4,7 @@ const express = require('express')
 const models  = require('./db/models/index');
 const bcrypt  = require('bcrypt');
 const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
@@ -18,16 +18,22 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// app.use(cookieParser());
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
 
-app.post('/login', (req, res) => {
+app.get('/get_info', passport.authenticate('jwt', { session : false }), function(req, res) {
+  console.log('get_info success')
   console.log(req)
+  res.status(200).send({ foo: 'bar' })
+});
+
+app.post('/login', (req, res) => {
   passport.authenticate('local', { session: false }, (error, user) => {
     if (error || !user) {
       res.status(400).json({ error });
