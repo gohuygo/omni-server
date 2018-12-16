@@ -1,6 +1,6 @@
 ## Server
 
-  Server is hosted on Heroku - https://floating-hamlet-63452.herokuapp.com
+  Server is hosted on Heroku - http://floating-hamlet-63452.herokuapp.com
 
 ### Installation
 
