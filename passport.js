@@ -25,9 +25,11 @@ passport.use(new LocalStrategy({
 }))
 
 passport.use(new JWTStrategy({
-  jwtFromRequest: req => req.cookies.jwt,
+  jwtFromRequest: req => {console.log(req.cookies); req.cookies.jwt},
   secretOrKey: process.env.JWT_SECRET
 }, (jwtPayload, done) => {
+  console.log("JWT STRAT")
+  console.log(jwtPayload)
   if (Date.now() > jwtPayload.expires) {
     return done('Access token is expired')
   }
