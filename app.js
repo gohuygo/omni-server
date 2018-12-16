@@ -16,6 +16,8 @@ require('./passport.js');
 
 const app = express()
 
+app.enable("trust proxy")
+
 app.use(sslRedirect())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
