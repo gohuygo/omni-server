@@ -5,6 +5,7 @@ const models  = require('./db/models/index');
 const bcrypt  = require('bcrypt');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
+const sslRedirect = require('heroku-ssl-redirect')
 
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
@@ -15,6 +16,7 @@ require('./passport.js');
 
 const app = express()
 
+app.use(sslRedirect())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 

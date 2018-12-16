@@ -24,10 +24,9 @@ passport.use(new LocalStrategy({
   }
 }))
 
-  // Does not work with Heroku yet
-  // jwtFromRequest: req => {console.log(req, req.cookies); return req.cookies.jwt},
 passport.use(new JWTStrategy({
-  jwtFromRequest: req => req.query.jwt,
+  // jwtFromRequest: req => req.query.jwt,
+  jwtFromRequest: req => {console.log(req, req.cookies); return req.cookies.jwt},
 
   secretOrKey: process.env.JWT_SECRET
 }, (jwtPayload, done) => {
