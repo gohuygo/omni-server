@@ -16,6 +16,9 @@ require('./passport.js');
 
 const app = express()
 
+app.enable("trust proxy", 1)
+app.use(sslRedirect())
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -23,14 +26,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.enable("trust proxy", 1)
-
-app.use(sslRedirect())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(cookieParser());
-
 
 
 app.get('/get_info', passport.authenticate('jwt', { session : false }), function(req, res) {
